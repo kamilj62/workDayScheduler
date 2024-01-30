@@ -15,16 +15,17 @@ $(function() {
   });
 
   function applyTimeClasses() {
- 
     $(".time-block").each(function() {
       var blockHour = parseInt($(this).attr("id"));
+      console.log(blockHour);
       if (blockHour > hour) {
-        $('.time-block').addClass("future");
+        $(this).addClass("future");
       } else if (blockHour === hour) {
-        $('.time-block').addClass("present");
-      } else {
-        $('.time-block').addClass("past");
+        $(this).addClass("present");
+      } else if (blockHour < hour) {
+        $(this).addClass("past");
       }
+      console.log(hour);
     });
   }
 
@@ -48,10 +49,6 @@ $(function() {
   applyTimeClasses();
   loadSavedDescriptions();
   displayTime();
-
-  // Update the time classes every second.
-  setInterval(function() {
-    hour = dayjs().hour();
-    applyTimeClasses();
-  }, 1000);
+  applyTimeClasses();
+ 
 });
